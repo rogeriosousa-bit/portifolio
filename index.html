@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rogério | Portfólio Pessoal</title>
+  <meta name="description" content="Portfólio profissional de Rogério - Desenvolvedor e Criador de Soluções Digitais." />
+
+  <!-- Fonte Inter do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuração de Cores e Tema Escuro no Tailwind -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6', // Azul Royal Vibrante
+              600: '#2563eb', // Azul Principal
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#172554',
+            },
+            accent: {
+              400: '#38bdf8', // Azul Celeste / Ciano
+              500: '#0ea5e9',
+              600: '#0284c7',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Script executado antes da renderização para evitar flash de tema errado -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-brand-600 selection:text-white">
+
+  <!-- =====================================================================
+       1. CABEÇALHO FIXO (NAVBAR)
+       ===================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo / Nome -->
+        <a href="#inicio" class="flex items-center gap-2.5 group focus:outline-none">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-brand-600/20 group-hover:scale-105 transition-transform">
+            R
+          </div>
+          <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+            Rogério<span class="text-brand-600 dark:text-accent-400">.</span>
+          </span>
+        </a>
+
+        <!-- Navegação Desktop -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#sobre" class="text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-accent-400 transition-colors">Sobre</a>
+          <a href="#projetos" class="text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-accent-400 transition-colors">Projetos</a>
+          <a href="#habilidades" class="text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-accent-400 transition-colors">Habilidades</a>
+          <a href="#contato" class="text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-accent-400 transition-colors">Contato</a>
+        </nav>
+
+        <!-- Ações à Direita: Botão de Tema e Menu Mobile -->
+        <div class="flex items-center gap-3">
+          <!-- Botão Alternador Claro / Escuro -->
+          <button
+            id="theme-toggle"
+            type="button"
+            aria-label="Alternar tema claro e escuro"
+            class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/90 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700/60 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
+          >
+            <!-- Ícone de Sol (exibido no modo escuro para voltar ao claro) -->
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Ícone de Lua (exibido no modo claro para ir ao escuro) -->
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-brand-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+
+          <!-- Botão Menu Mobile -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            aria-label="Abrir menu de navegação"
+            class="md:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-1">
+      <a href="#sobre" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 dark:text-slate-200 dark:hover:bg-slate-800">Sobre</a>
+      <a href="#projetos" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 dark:text-slate-200 dark:hover:bg-slate-800">Projetos</a>
+      <a href="#habilidades" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 dark:text-slate-200 dark:hover:bg-slate-800">Habilidades</a>
+      <a href="#contato" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600 dark:text-slate-200 dark:hover:bg-slate-800">Contato</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================================
+         2. SEÇÃO HERO (INÍCIO / APRESENTAÇÃO)
+         ===================================================================== -->
+    <section id="inicio" class="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
+      <!-- Elementos decorativos de fundo em tons de azul -->
+      <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] rounded-full bg-brand-500/10 dark:bg-brand-500/15 blur-3xl"></div>
+      <div class="pointer-events-none absolute top-40 right-0 w-72 h-72 rounded-full bg-accent-400/10 dark:bg-accent-500/10 blur-3xl"></div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Badge de status -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 dark:bg-brand-950/80 border border-brand-200/80 dark:border-brand-800/80 text-brand-700 dark:text-accent-400 text-xs sm:text-sm font-medium mb-6">
+          <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
+          Disponível para novos projetos e oportunidades
+        </div>
+
+        <!-- Título Principal (Edite seu cargo/especialidade aqui) -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+          Olá, eu sou o <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-500 dark:from-brand-400 dark:to-accent-400">Rogério</span>.<br />
+          Desenvolvedor &amp; Criador de Soluções.
+        </h1>
+
+        <!-- Breve Descrição -->
+        <p class="mt-6 text-base sm:text-lg lg:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          Transformo ideias em aplicações modernas, funcionais e bem estruturadas. Este é o meu espaço para compartilhar projetos, experimentos e evolução na tecnologia.
+        </p>
+
+        <!-- Botões de Chamada para Ação (CTA) -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="#projetos"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-lg shadow-brand-600/25 hover:shadow-brand-600/40 transition-all"
+          >
+            Ver Projetos
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <a
+            href="#contato"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 font-semibold border border-slate-200 dark:border-slate-700 transition-all"
+          >
+            Entrar em Contato
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. SEÇÃO SOBRE MIM
+         ===================================================================== -->
+    <section id="sobre" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200/70 dark:border-slate-800/70">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Coluna da Foto / Avatar Estilizado -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative group">
+              <!-- Moldura decorativa azul -->
+              <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-brand-600 to-accent-400 opacity-30 dark:opacity-40 blur-lg group-hover:opacity-50 transition-opacity"></div>
+              
+              <!-- Container da Foto: Substitua o src pela URL da sua foto quando quiser -->
+              <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-800 border-2 border-brand-500/30 shadow-xl flex items-center justify-center">
+                <img
+                  src="https://placehold.co/400x400/1e40af/ffffff?text=Rog%C3%A9rio"
+                  alt="Foto de perfil de Rogério"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                  class="w-full h-full object-cover"
+                />
+                <!-- Fallback caso a imagem não carregue -->
+                <div class="hidden w-full h-full flex-col items-center justify-center bg-gradient-to-br from-brand-700 to-brand-900 text-white p-6 text-center">
+                  <span class="text-5xl font-extrabold tracking-wider">R</span>
+                  <span class="mt-2 text-xs uppercase tracking-widest text-brand-200">Sua Foto Aqui</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna de Texto Sobre Mim -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-block px-3 py-1 rounded-lg bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-accent-400 text-xs font-semibold uppercase tracking-wider">
+              Sobre Mim
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              Focado em construir soluções práticas com código limpo.
+            </h2>
+            
+            <!-- Edite os parágrafos abaixo com a sua história -->
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+              Olá! Sou o <strong>Rogério</strong>, entusiasta e desenvolvedor apaixonado por tecnologia, resolução de problemas e criação de interfaces intuitivas. Este portfólio funciona como meu hub central no GitHub para reunir ideias que saíram do papel.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+              Atualmente estou desenvolvendo novos projetos práticos para aprimorar minhas habilidades em desenvolvimento web, automação e arquitetura de software. Fique à vontade para explorar os repositórios abaixo e acompanhar minha evolução!
+            </p>
+
+            <!-- Destaques rápidos -->
+            <div class="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                <p class="text-2xl font-bold text-brand-600 dark:text-accent-400">100%</p>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">Foco em Qualidade</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                <p class="text-2xl font-bold text-brand-600 dark:text-accent-400">Open</p>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">Código no GitHub</p>
+              </div>
+              <div class="col-span-2 sm:col-span-1 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                <p class="text-2xl font-bold text-brand-600 dark:text-accent-400">Contínuo</p>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">Aprendizado Diário</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. SEÇÃO DE PROJETOS (CARDS PRONTOS PARA SUBSTITUIR)
+         ===================================================================== -->
+    <section id="projetos" class="py-20 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Cabeçalho da Seção -->
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="inline-block px-3 py-1 rounded-lg bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-accent-400 text-xs font-semibold uppercase tracking-wider mb-3">
+            Portfólio
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+            Meus Projetos
+          </h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300">
+            Aqui estão alguns modelos iniciais prontos para serem substituídos pelos meus próximos projetos e repositórios reais.
+          </p>
+        </div>
+
+        <!-- Grade de Projetos (3 Colunas em telas grandes) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <!-- ================= PROJETO 1 ================= -->
+          <article class="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-600/10 hover:-translate-y-1 transition-all duration-300">
+            <!-- Capa / Banner do Projeto -->
+            <div class="relative h-48 bg-gradient-to-br from-brand-700 via-brand-600 to-accent-500 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                  Em Breve / Modelo
+                </span>
+                <!-- Ícone ilustrativo -->
+                <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="text-white/90 font-semibold text-lg">
+                Projeto 01
+              </div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="flex-1 p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-accent-400 transition-colors">
+                Sistema de Gestão Web
+              </h3>
+              <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
+                Espaço reservado para o primeiro projeto. Ideal para descrever uma aplicação web completa, painel administrativo ou ferramenta de produtividade.
+              </p>
+
+              <!-- Tags de Tecnologias -->
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">HTML5</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">CSS3</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">JavaScript</span>
+              </div>
+
+              <!-- Botões de Ação -->
+              <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Ver Demo
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                  Código
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================= PROJETO 2 ================= -->
+          <article class="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-600/10 hover:-translate-y-1 transition-all duration-300">
+            <!-- Capa / Banner do Projeto -->
+            <div class="relative h-48 bg-gradient-to-br from-slate-800 via-brand-800 to-brand-600 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                  Em Breve / Modelo
+                </span>
+                <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="text-white/90 font-semibold text-lg">
+                Projeto 02
+              </div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="flex-1 p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-accent-400 transition-colors">
+                Aplicação Interativa / API
+              </h3>
+              <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
+                Espaço reservado para um segundo projeto. Perfeito para integrações com APIs externas, dashboards dinâmicos ou aplicativos responsivos.
+              </p>
+
+              <!-- Tags de Tecnologias -->
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">TypeScript</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">Tailwind CSS</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">REST API</span>
+              </div>
+
+              <!-- Botões de Ação -->
+              <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Ver Demo
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                  Código
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ================= PROJETO 3 ================= -->
+          <article class="group flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-600/10 hover:-translate-y-1 transition-all duration-300">
+            <!-- Capa / Banner do Projeto -->
+            <div class="relative h-48 bg-gradient-to-br from-accent-600 via-brand-600 to-brand-900 p-6 flex flex-col justify-between overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                  Em Breve / Modelo
+                </span>
+                <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <div class="text-white/90 font-semibold text-lg">
+                Projeto 03
+              </div>
+            </div>
+
+            <!-- Conteúdo do Card -->
+            <div class="flex-1 p-6 flex flex-col">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-accent-400 transition-colors">
+                Automação &amp; Utilitários
+              </h3>
+              <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
+                Espaço reservado para scripts de automação, ferramentas CLI ou experimentos open-source publicados diretamente no GitHub.
+              </p>
+
+              <!-- Tags de Tecnologias -->
+              <div class="mt-5 flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">Python</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">Node.js</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/90 dark:text-accent-400 border border-brand-100 dark:border-brand-800/60">Git</span>
+              </div>
+
+              <!-- Botões de Ação -->
+              <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Ver Demo
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs sm:text-sm font-semibold transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                  Código
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. SEÇÃO DE HABILIDADES & TECNOLOGIAS
+         ===================================================================== -->
+    <section id="habilidades" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200/70 dark:border-slate-800/70">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="inline-block px-3 py-1 rounded-lg bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-accent-400 text-xs font-semibold uppercase tracking-wider mb-3">
+            Stack &amp; Ferramentas
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+            Habilidades &amp; Tecnologias
+          </h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300">
+            Principais linguagens, frameworks e ferramentas que utilizo no dia a dia para tirar ideias do papel.
+          </p>
+        </div>
+
+        <!-- Categorias de Habilidades -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Front-end -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-xl bg-brand-600/10 dark:bg-brand-500/20 text-brand-600 dark:text-accent-400 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Front-end</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">HTML5</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">CSS3</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">JavaScript (ES6+)</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">Tailwind CSS</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">React</span>
+            </div>
+          </div>
+
+          <!-- Back-end & Dados -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-xl bg-brand-600/10 dark:bg-brand-500/20 text-brand-600 dark:text-accent-400 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Back-end &amp; Dados</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">Node.js</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">Python</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">SQL / PostgreSQL</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">APIs REST</span>
+            </div>
+          </div>
+
+          <!-- Ferramentas & DevOps -->
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800">
+            <div class="w-11 h-11 rounded-xl bg-brand-600/10 dark:bg-brand-500/20 text-brand-600 dark:text-accent-400 flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Ferramentas &amp; Fluxo</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">Git &amp; GitHub</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">GitHub Pages</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">VS Code</span>
+              <span class="px-3 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700 shadow-2xs">Linux / Terminal</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         6. SEÇÃO DE CONTATO
+         ===================================================================== -->
+    <section id="contato" class="py-20 sm:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- Informações e Links Sociais -->
+          <div class="lg:col-span-5 space-y-6">
+            <span class="inline-block px-3 py-1 rounded-lg bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-accent-400 text-xs font-semibold uppercase tracking-wider">
+              Contato
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+              Vamos conversar?
+            </h2>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Tem alguma ideia de projeto, oportunidade de colaboração ou apenas quer trocar uma ideia sobre tecnologia? Me envie uma mensagem ou conecte-se pelas redes abaixo.
+            </p>
+
+            <!-- Cards de Links Sociais (Substitua os href pelos seus links reais) -->
+            <div class="space-y-3 pt-2">
+              <!-- GitHub -->
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500 dark:hover:border-accent-400 transition-all group"
+              >
+                <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-slate-800 text-brand-600 dark:text-accent-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">GitHub</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">github.com/seu-usuario</p>
+                </div>
+              </a>
+
+              <!-- LinkedIn -->
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500 dark:hover:border-accent-400 transition-all group"
+              >
+                <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-slate-800 text-brand-600 dark:text-accent-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">LinkedIn</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">linkedin.com/in/seu-perfil</p>
+                </div>
+              </a>
+
+              <!-- E-mail -->
+              <a
+                href="mailto:rogerio@exemplo.com"
+                class="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-brand-500 dark:hover:border-accent-400 transition-all group"
+              >
+                <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-slate-800 text-brand-600 dark:text-accent-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">E-mail</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">rogerio@exemplo.com</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Formulário Simples de Contato -->
+          <div class="lg:col-span-7">
+            <form
+              id="contact-form"
+              class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="nome" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                    Seu Nome
+                  </label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    required
+                    placeholder="Ex: Ana Silva"
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                    Seu E-mail
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="ana@exemplo.com"
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="mensagem" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                  Mensagem
+                </label>
+                <textarea
+                  id="mensagem"
+                  name="mensagem"
+                  rows="4"
+                  required
+                  placeholder="Escreva sua mensagem para o Rogério..."
+                  class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all resize-none"
+                ></textarea>
+              </div>
+
+              <!-- Caixa de feedback visual (substitui qualquer uso de alert) -->
+              <div
+                id="form-feedback"
+                class="hidden p-4 rounded-xl bg-brand-50 dark:bg-brand-950/90 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-accent-400 text-sm font-medium"
+              ></div>
+
+              <button
+                type="submit"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-md shadow-brand-600/20 transition-all cursor-pointer"
+              >
+                Enviar Mensagem
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       7. RODAPÉ (FOOTER)
+       ===================================================================== -->
+  <footer class="py-8 bg-white dark:bg-slate-950 border-t border-slate-200/80 dark:border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
+      <p>
+        &copy; <span id="current-year"></span> <strong class="text-slate-700 dark:text-slate-200">Rogério</strong>. Todos os direitos reservados.
+      </p>
+      <p class="text-xs">
+        Hospedado com <span class="text-brand-600 dark:text-accent-400 font-medium">GitHub Pages</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       JAVASCRIPT: TEMA CLARO/ESCURO, MENU MOBILE E FORMULÁRIO
+       ===================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Atualiza o ano automaticamente no rodapé
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // 2. Controle do Tema Claro / Escuro (Dark Mode)
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+
+      function updateThemeIcons() {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          lightIcon.classList.remove('hidden');
+          darkIcon.classList.add('hidden');
+        } else {
+          darkIcon.classList.remove('hidden');
+          lightIcon.classList.add('hidden');
+        }
+      }
+
+      // Sincroniza ícones ao carregar a página
+      updateThemeIcons();
+
+      // Alterna o tema ao clicar no botão e salva no localStorage
+      themeToggleBtn.addEventListener('click', () => {
+        const htmlEl = document.documentElement;
+        if (htmlEl.classList.contains('dark')) {
+          htmlEl.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          htmlEl.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateThemeIcons();
+      });
+
+      // Escuta mudanças de preferência do sistema operacional caso o usuário não tenha fixado manualmente
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+          updateThemeIcons();
+        }
+      });
+
+      // 3. Controle do Menu Mobile
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Fecha o menu mobile ao clicar em qualquer link
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+
+      // 4. Envio do Formulário de Contato (Simulação / Preparado para mailto ou Formspree)
+      const contactForm = document.getElementById('contact-form');
+      const formFeedback = document.getElementById('form-feedback');
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value.trim();
+
+        formFeedback.textContent = `Obrigado pelo contato, ${nome}! Sua mensagem foi registrada com sucesso. Em breve retornarei.`;
+        formFeedback.classList.remove('hidden');
+        contactForm.reset();
+
+        // Oculta a mensagem de feedback após 6 segundos
+        setTimeout(() => {
+          formFeedback.classList.add('hidden');
+        }, 6000);
+      });
+    });
+  </script>
+</body>
+</html>
